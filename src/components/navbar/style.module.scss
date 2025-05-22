@@ -1,0 +1,497 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba($dark, 0.25);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    pointer-events: all;
+}
+
+.navWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: $spacing-md;
+    transition: all 0.4s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    &.scrolled {
+        padding: $spacing-sm $spacing-md 0;
+    }
+}
+
+.navbar {
+    background: rgba($white, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow-lg;
+    overflow: hidden;
+    border: 1px solid rgba($dark, 0.05);
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $spacing-xs;
+    height: 4.5rem;
+    
+    @include respond-to(medium-tablet) {
+        padding: 0 $spacing-lg;
+    }
+}
+
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+    img {
+        width: auto;
+        height: 17vh;
+        object-fit: contain;
+    }
+}
+
+.mainNavContainer {
+    position: relative;
+}
+
+.mainNav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    @include respond-to(medium-tablet) {
+        display: none;
+    }
+}
+
+.navItem {
+    position: relative;
+    
+    &.active {
+        background-color: $gray;
+        border-radius: $border-radius-lg;
+    }
+    
+    a, span {
+        display: flex;
+        align-items: center;
+        color: $dark;
+        font-weight: $semi-bold-font-weight;
+        font-size: $font-size-base;
+        padding: $spacing-xxs $spacing-sm;
+        padding-right: $spacing-xxs;
+        cursor: pointer;
+        position: relative;
+        gap: $spacing-xs;
+        transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+        
+        &:hover, &.active {
+            color: $dark;
+        }
+    }
+}
+
+.navArrow {
+    font-size: 12px;
+    transition: transform 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+}
+
+.megaMenu {
+    overflow: hidden;
+    width: 100%;
+    border-top: 1px solid rgba($dark, 0.05);
+    background-color: $white;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+}
+
+.megaMenuContent {
+    padding: $spacing-lg $spacing-xl;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+// Improved Sectors Layout - Powersheds style
+.sectorsLayout {
+    display: flex;
+    gap: $spacing-xl;
+}
+
+.sectorImages {
+    flex: 0 0 40%;
+    display: flex;
+    gap: $spacing-md;
+}
+
+.sectorImageContainer {
+    flex: 1;
+    position: relative;
+    height: 280px;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.5, 0.75, 0, 1);
+    box-shadow: $box-shadow-sm;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    
+    &:hover {
+        box-shadow: $box-shadow-lg;
+    }
+}
+
+.sectorImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    img {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.sectorOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba($dark, 0.7) 0%, rgba($dark, 0.3) 50%, rgba($dark, 0) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: $spacing-md;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    h3 {
+        color: $white;
+        margin: 0;
+        font-size: $big-font-size;
+        font-weight: $bold-font-weight;
+    }
+    
+    .viewSector {
+        color: rgba($white, 0.8);
+        font-size: $small-font-size;
+        margin-top: $spacing-xs;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    }
+    
+    .sectorImageContainer:hover & {
+        background: linear-gradient(0deg, rgba($dark, 0.8) 0%, rgba($dark, 0.5) 60%, rgba($dark, 0.2) 100%);
+        
+        .viewSector {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+.sectorImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba($dark, 0.1) 0%, rgba($dark, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    h3 {
+        color: $dark;
+        font-size: $big-font-size;
+        font-weight: $bold-font-weight;
+    }
+}
+
+// Improved Sectors Listing - Powersheds style
+.sectorsListing {
+    flex: 1;
+    display: flex;
+    gap: $spacing-xl;
+    background-color: $gray;
+    border-radius: $border-radius-sm;
+    padding: $spacing-lg;
+}
+
+.allSectors {
+    flex: 0 0 30%;
+    border-right: 1px solid rgba($dark, 0.05);
+    padding-right: $spacing-md;
+}
+
+.sectorsList {
+    display: flex;
+    flex-direction: column;
+}
+
+.sectorItem {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-lg;
+    margin-bottom: $spacing-xs;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    a {
+        color: $dark;
+        text-decoration: none;
+        display: block;
+        font-size: $font-size-base;
+        font-weight: $medium-font-weight;
+        transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    }
+    
+    &:hover {
+        background-color: rgba($dark, 0.05);
+        transform: translateX(3px);
+    }
+    
+    &.activeSector {
+        background-color: $white;
+        box-shadow: $box-shadow-sm;
+        
+        a {
+            font-weight: $bold-font-weight;
+        }
+    }
+}
+
+.subsectorsList {
+    flex: 1;
+    padding-left: $spacing-md;
+}
+
+.subsectorsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+}
+
+.subsectorItem {
+    a {
+        text-decoration: none;
+        color: $dark;
+        transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+        
+        &:hover {
+            color: $dark;
+        }
+    }
+}
+
+.subsectorContent {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+    background-color: $white;
+    box-shadow: $box-shadow-sm;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $box-shadow-md;
+    }
+}
+
+.subsectorImage {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    img {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .subsectorContent:hover & img {
+        transform: scale(1.05);
+    }
+}
+
+.subsectorInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.subsectorName {
+    font-weight: $semi-bold-font-weight;
+    font-size: $font-size-base;
+}
+
+.itemCount {
+    background-color: $gray;
+    color: $dark;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: $border-radius-sm;
+    display: inline-block;
+    width: fit-content;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+}
+
+.columnTitle {
+    font-size: $font-size-sm;
+    font-weight: $bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+// Projects Layout
+.projectsLayout {
+    padding: $spacing-md;
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $spacing-lg;
+}
+
+.projectCard {
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    &:hover {
+        .projectName {
+            color: $dark;
+        }
+        
+        .projectImageWrapper {
+            box-shadow: $box-shadow-lg;
+        }
+        
+        .projectOverlay {
+            opacity: 1;
+        }
+    }
+}
+
+.projectImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    margin-bottom: $spacing-sm;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    box-shadow: $box-shadow-sm;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    
+    img {
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.projectImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba($dark, 0.05) 0%, rgba($dark, 0.1) 100%);
+}
+
+.projectOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($dark, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+}
+
+.viewProject {
+    color: $white;
+    font-size: $font-size-sm;
+    font-weight: $semi-bold-font-weight;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $border-radius-lg;
+    background: rgba($dark, 0.8);
+    backdrop-filter: blur(4px);
+}
+
+.projectName {
+    font-size: $font-size-base;
+    font-weight: $semi-bold-font-weight;
+    margin: 0;
+    color: $dark;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+}
+
+.viewAllLink {
+    display: inline-flex;
+    align-items: center;
+    padding: $spacing-xs $spacing-md;
+    background-color: $dark;
+    color: $white;
+    border-radius: $border-radius-lg;
+    font-size: $font-size-sm;
+    font-weight: $semi-bold-font-weight;
+    margin-top: $spacing-lg;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    
+    a {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    &:hover {
+        background-color: lighten($dark, 10%);
+        
+        .viewAllArrow {
+            transform: translateX(3px);
+        }
+    }
+}
+
+.viewAllArrow {
+    transition: transform 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+}
+
+@include respond-to(medium-tablet) {
+    .sectorImages {
+        flex-direction: column;
+    }
+    
+    .sectorsListing {
+        flex-direction: column;
+    }
+    
+    .subsectorsGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projectsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@include respond-to(laptop) {
+    .sectorsLayout {
+        flex-direction: column;
+    }
+    
+    .sectorImages {
+        flex-direction: row;
+    }
+}

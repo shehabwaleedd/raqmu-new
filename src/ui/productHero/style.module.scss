@@ -1,0 +1,44 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.hero {
+    width: 100%;
+    padding: $spacing-4xl 0;
+
+    @include respond-to(medium-tablet) {
+        padding: $spacing-2xl 0;
+    }
+}
+
+.content {
+    max-width: $container-max-width-lg;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+}
+
+.title {
+    font-family: $title-font;
+    font-size: $biggest-font-size;
+    font-weight: $bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-lg;
+    line-height: 1.1;
+    letter-spacing: -1px;
+
+    @include respond-to(medium-tablet) {
+        font-size: $bigger-font-size;
+    }
+}
+
+.subtitle {
+    font-family: $body-font;
+    font-size: $medium-font-size;
+    color: $text-gray;
+    max-width: 800px;
+    margin: 0;
+    line-height: 1.5;
+
+    @include respond-to(medium-tablet) {
+        font-size: $body-font-size;
+    }
+}

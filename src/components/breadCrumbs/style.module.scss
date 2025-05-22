@@ -1,0 +1,59 @@
+@import '@/styles/variables';
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-bottom: $spacing-xl;
+    font-family: $medium-font;
+    font-size: $small-font-size;
+    background-color: $gray;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-sm;
+    display: inline-flex;
+}
+
+.breadcrumbItem {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.link {
+    color: $text-gray;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: $dark;
+        transition: width 0.3s cubic-bezier(0.5, 0.75, 0, 1);
+    }
+
+    &:hover {
+        color: $dark;
+        
+        &:after {
+            width: 100%;
+        }
+    }
+}
+
+.separator {
+    color: $text-gray;
+}
+
+.current {
+    color: $dark;
+    white-space: nowrap;
+    font-weight: $bold-font-weight;
+}

@@ -1,0 +1,99 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.button {
+    display: inline-flex;
+    text-decoration: none;
+    border: none;
+    border-radius: 24px;
+    font-weight: $semi-bold-font-weight;
+    font-family: $title-font;
+    cursor: pointer;
+    transition: $transition-normal;
+    overflow: hidden;
+    position: relative;
+    &:focus {outline: none;}
+}
+
+.buttonInner {
+    @include flexCenter(row);
+    width: 100%;
+    height: 100%;
+}
+
+.label {
+    position: relative;
+    z-index: 1;
+}
+
+.iconLeft {
+    margin-right: $spacing-xs;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.iconRight {
+    margin-left: $spacing-xs;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: $transition-fast;
+    .button:hover & {
+        transform: translateX(3px);
+    }
+}
+
+.primary {
+    background-color: $dark;
+    color: $white;
+    &:hover {background-color: darken($dark, 10%);}
+}
+
+.secondary {
+    background-color: $gray;
+    color: $dark;
+    &:hover {background-color: darken($gray, 5%);}
+}
+
+.outline {
+    background-color: $transparent;
+    color: $dark;
+    border: 1px solid rgba($dark, 0.2);
+    &:hover {background-color: rgba($dark, 0.05);}
+}
+
+.text {
+    background-color: $transparent;
+    color: $dark;
+    padding: 0 !important;
+    border-radius: 0;
+    &:hover {color: darken($dark, 15%);}
+}
+
+.shop {
+    background-color: $white;
+    color: $dark;
+    box-shadow: $box-shadow-sm;
+    &:hover {box-shadow: $box-shadow-md;}
+}
+
+.sm {
+    font-size: $font-size-sm;
+    padding: $spacing-xs $spacing-sm;
+    height: 36px;
+}
+
+.md {
+    font-size: $font-size-base;
+    padding: $spacing-sx $spacing-md;
+    height: 44px;
+}
+
+.lg {
+    font-size: $font-size-lg;
+    padding: $spacing-sm $spacing-lg;
+    height: 52px;
+}

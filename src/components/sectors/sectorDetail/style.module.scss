@@ -1,0 +1,335 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.sectorPage {
+    background-color: $white;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+
+    @include respond-to(medium-tablet) {
+        padding: 0 24px;
+    }
+
+    @include respond-to(phone) {
+        padding: 0 16px;
+    }
+}
+
+.heroSection {
+    position: relative;
+    height: 100vh;
+    min-height: 650px;
+    max-height: 900px;
+    color: $white;
+
+    img {
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0 !important;
+    }
+
+    @include respond-to(medium-tablet) {
+        height: 90vh;
+    }
+
+    @include respond-to(phone) {
+        height: 85vh;
+    }
+}
+
+.heroImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.heroContent {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 120px;
+    max-width: 800px;
+}
+
+.breadcrumbWrapper {
+    margin-bottom: 32px;
+}
+
+.sectorTitle {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 24px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    @include respond-to(large-tablet) {
+        font-size: 56px;
+    }
+
+    @include respond-to(small-tablet) {
+        font-size: 48px;
+    }
+
+    @include respond-to(phone) {
+        font-size: 40px;
+    }
+}
+
+.sectorDescription {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+    p {
+        margin: 0 0 16px;
+        color: $white;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @include respond-to(medium-tablet) {
+        font-size: 18px;
+    }
+
+    @include respond-to(phone) {
+        font-size: 16px;
+    }
+}
+
+.heroButtons {
+    display: flex;
+    gap: 16px;
+
+    @include respond-to(phone) {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+.sectionHeader {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+
+    @include respond-to(medium-tablet) {
+        margin-bottom: 40px;
+    }
+}
+
+.sectionEyebrow {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #000;
+    margin-bottom: 16px;
+}
+
+.sectionTitle {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 16px;
+
+    @include respond-to(medium-tablet) {
+        font-size: 36px;
+    }
+
+    @include respond-to(phone) {
+        font-size: 30px;
+    }
+}
+
+.sectionSubtitle {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+
+    @include respond-to(phone) {
+        font-size: 16px;
+    }
+}
+    
+.areasSection {
+    padding: 120px 0;
+
+    @include respond-to(medium-tablet) {
+        padding: 100px 0;
+    }
+
+    @include respond-to(phone) {
+        padding: 80px 0;
+    }
+}
+
+.areasTabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 2px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+
+    @include respond-to(medium-tablet) {
+        justify-content: flex-start;
+        margin-bottom: 36px;
+        flex-wrap: nowrap;
+    }
+}
+
+.areaTab {
+    position: relative;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 24px;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #000;
+    }
+
+    &.active {
+        color: #000;
+        font-weight: 600;
+    }
+
+    @include respond-to(phone) {
+        padding: 12px 16px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+}
+
+.activeIndicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #000;
+}
+
+.areasContent {
+    position: relative;
+    min-height: 500px;
+
+    @include respond-to(medium-tablet) {
+        min-height: 600px;
+    }
+
+    @include respond-to(phone) {
+        min-height: 700px;
+    }
+}
+
+.areaPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 50px;
+
+    @include respond-to(medium-tablet) {
+        flex-direction: column-reverse;
+        gap: 30px;
+    }
+}
+
+.areaInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.areaTitle {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 24px;
+
+    @include respond-to(medium-tablet) {
+        font-size: 30px;
+    }
+
+    @include respond-to(phone) {
+        font-size: 26px;
+    }
+}
+
+.areaDescription {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 36px;
+    flex-grow: 1;
+
+    p {
+        margin: 0 0 16px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @include respond-to(phone) {
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+}
+
+.areaImageContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.areaImage {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+
+    img {
+        object-fit: cover;
+    }
+
+    @include respond-to(phone) {
+        height: 300px;
+    }
+}

@@ -1,0 +1,203 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.cardLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: $white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+
+    &.product {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+        &:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .title {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+
+            .stars {
+                color: #FFB800;
+            }
+
+            .ratingValue {
+                font-weight: 500;
+            }
+        }
+    }
+
+    &.info {
+        background-color: rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 16px;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                color: #555;
+            }
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    }
+
+    &.feature {
+        box-shadow: none;
+        padding: 24px;
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                color: #222;
+            }
+        }
+
+        .title {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 15px;
+            color: #555;
+        }
+    }
+
+    &.simple {
+        box-shadow: none;
+
+        .title {
+            font-size: 20px;
+        }
+
+        .description {
+            margin-bottom: 16px;
+        }
+    }
+
+    &.square {
+        .imageWrapper {
+            aspect-ratio: 1/1;
+        }
+    }
+
+    &.landscape {
+        .imageWrapper {
+            aspect-ratio: 16/9;
+        }
+    }
+
+    &.portrait {
+        .imageWrapper {
+            aspect-ratio: 3/4;
+        }
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+.content {
+    padding: 20px;
+}
+
+.title {
+    font-family: $title-font;
+    font-size: 20px;
+    font-weight: 600;
+    color: #222;
+    margin: 0 0 12px;
+}
+
+.description {
+    font-family: $body-font;
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+
+    p {
+        margin: 0;
+    }
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+
+    li {
+        font-size: 14px;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    font-family: $medium-font;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+}
+
+.actionIcon {
+    margin-left: 6px;
+    transition: transform 0.2s ease;
+
+    .card:hover & {
+        transform: translateX(3px);
+    }
+}

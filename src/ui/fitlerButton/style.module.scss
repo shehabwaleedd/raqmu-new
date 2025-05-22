@@ -1,0 +1,25 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.filterButton {
+    padding: $spacing-xs $spacing-md;
+    font-family: $medium-font;
+    font-size: $font-size-sm;
+    font-weight: $medium-font-weight;
+    color: $text-gray;
+    background-color: $transparent;
+    border: 1px solid rgba($dark, 0.1);
+    border-radius: $spacing-sm;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+        background-color: rgba($dark, 0.05);
+    }
+
+    &.active {
+        background-color: $dark;
+        color: $white;
+        border-color: $dark;
+    }
+}

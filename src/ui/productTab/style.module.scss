@@ -1,0 +1,54 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.tabContainer {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    margin-bottom: $spacing-xl;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid rgba($dark, 0.1);
+    gap: $spacing-sm;
+    min-width: max-content;
+}
+
+.tab {
+    position: relative;
+    padding: $spacing-sm $spacing-md;
+    font-family: $title-font;
+    font-size: $font-size-base;
+    font-weight: $medium-font-weight;
+    color: $text-gray;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: $transition-fast;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover {
+        color: $dark;
+    }
+
+    &.active {
+        color: $dark;
+        font-weight: $semi-bold-font-weight;
+    }
+}
+
+.activeIndicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $dark;
+}

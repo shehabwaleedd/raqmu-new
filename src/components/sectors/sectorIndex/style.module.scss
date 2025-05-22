@@ -1,0 +1,29 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.sectorsPage {
+    background-color: $white;
+    min-height: 100vh;
+    padding: $spacing-4xl 0 $spacing-5xl;
+}
+
+.container {
+    max-width: $container-max-width-xxl;
+    margin: 0 auto;
+    padding: 0 $site-margin-desktop;
+
+    @include respond-to(medium-tablet) {
+        padding: 0 $site-margin-mobile;
+    }
+}
+
+.sectorsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: $spacing-3xl;
+
+    @include respond-to(large-tablet) {
+        grid-template-columns: 1fr;
+        gap: $spacing-xl;
+    }
+}

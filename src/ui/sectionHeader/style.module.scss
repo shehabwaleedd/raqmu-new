@@ -1,0 +1,110 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.header {
+    position: relative;
+    margin-bottom: $spacing-xl;
+
+    &.center {
+        text-align: center;
+
+        .subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    &.right {
+        text-align: right;
+
+        .subtitle {
+            margin-left: auto;
+        }
+    }
+
+    &.sm {
+        .title {
+            font-size: $big-font-size;
+
+            @include respond-to(medium-tablet) {
+                font-size: $medium-font-size;
+            }
+        }
+
+        .subtitle {
+            font-size: $font-size-base;
+        }
+    }
+
+    &.md {
+        .title {
+            font-size: $semi-big-font-size;
+
+            @include respond-to(medium-tablet) {
+                font-size: $big-font-size;
+            }
+        }
+
+        .subtitle {
+            font-size: $font-size-lg;
+        }
+    }
+
+    &.lg {
+        .title {
+            font-size: $bigger-font-size;
+
+            @include respond-to(medium-tablet) {
+                font-size: $semi-big-font-size;
+            }
+        }
+
+        .subtitle {
+            font-size: $body-font-size;
+        }
+    }
+
+    &.xl {
+        .title {
+            font-size: $biggest-font-size;
+
+            @include respond-to(medium-tablet) {
+                font-size: $bigger-font-size;
+            }
+        }
+
+        .subtitle {
+            font-size: $medium-font-size;
+        }
+    }
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: $medium-font;
+    font-size: $font-size-sm;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $text-gray;
+    margin-bottom: $spacing-sm;
+}
+
+.title {
+    font-family: $title-font;
+    font-weight: $bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-sm;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-family: $body-font;
+    color: $text-gray;
+    max-width: 600px;
+    line-height: 1.6;
+
+    p {
+        margin: 0;
+    }
+}

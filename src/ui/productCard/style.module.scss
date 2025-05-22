@@ -1,0 +1,91 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.cardLink {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    position: relative;
+    background-color: $white;
+    transition: $transition-normal;
+    height: 100%;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    border-radius: 12px 12px 0 0;
+
+    &:hover {
+        box-shadow: $box-shadow-md;
+
+        .image {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.content {
+    padding: $spacing-lg;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: $spacing-sm;
+
+    .stars {
+        color: #74B356;
+        font-size: $font-size-sm;
+    }
+
+    .ratingValue {
+        font-size: $font-size-sm;
+        font-weight: $semi-bold-font-weight;
+    }
+}
+
+.title {
+    font-family: $title-font;
+    font-size: $font-size-lg;
+    font-weight: $bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-xs;
+}
+
+.feature {
+    font-family: $body-font;
+    font-size: $font-size-sm;
+    color: $text-gray;
+    margin-bottom: $spacing-sm;
+}
+
+.price {
+    font-family: $medium-font;
+    font-size: $font-size-lg;
+    font-weight: $bold-font-weight;
+    color: $dark;
+
+    &::first-letter {
+        font-size: 0.9em;
+    }
+
+    &::after {
+        content: attr(data-currency);
+        font-size: 0.7em;
+        vertical-align: super;
+    }
+}

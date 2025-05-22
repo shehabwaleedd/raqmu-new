@@ -1,0 +1,456 @@
+// ProjectsClient style.module.scss - Enhanced with Powersheds-inspired design
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.projectsContainer {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: $spacing-3xl 0;
+}
+
+.projectsHeader {
+    margin-bottom: $spacing-3xl;
+}
+
+.toolbar {
+    @include flex(row, space-between, center);
+    margin-bottom: $spacing-xl;
+    padding: $spacing-xs $spacing-xs;
+    border-radius: $border-radius-md;
+    background-color: $brand-gray;
+    
+    @include respond-to(medium-tablet) {
+        flex-direction: column;
+        gap: $spacing-md;
+        align-items: stretch;
+    }
+}
+
+.toolbarLeft {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xl;
+    
+    @include respond-to(medium-tablet) {
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.filtersContainer {
+    position: relative;
+}
+
+.filterToggle {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    background-color: $white;
+    border: none;
+    border-radius: $border-radius-md;
+    color: $dark;
+    font-family: $medium-font;
+    font-size: $normal-font-size;
+    font-weight: $semi-bold-font-weight;
+    cursor: pointer;
+    transition: $transition-normal;
+    box-shadow: $box-shadow-sm;
+    
+    &:hover {
+        box-shadow: $box-shadow-md;
+    }
+    
+    &.active {
+        background-color: $dark;
+        color: $white;
+        
+        .filterCount {
+            background-color: $white;
+            color: $dark;
+        }
+    }
+    
+    svg {
+        transition: $transition-fast;
+    }
+}
+
+.filterCount {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 11px;
+    background-color: $dark;
+    color: $white;
+    font-size: $extra-small-font-size;
+}
+
+.results {
+    .count {
+        font-family: $body-font;
+        font-size: $normal-font-size;
+        color: $text-gray;
+        
+        .number {
+            color: $dark;
+            font-weight: $bold-font-weight;
+            font-family: $medium-font;
+        }
+    }
+}
+
+.sortContainer {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    @include respond-to(medium-tablet) {
+        width: 100%;
+    }
+}
+
+.sortLabel {
+    font-family: $body-font;
+    font-size: $normal-font-size;
+    color: $text-gray;
+    white-space: nowrap;
+}
+
+.customSelect {
+    position: relative;
+    min-width: 150px;
+    
+    @include respond-to(medium-tablet) {
+        width: 100%;
+    }
+}
+
+.sortSelect {
+    width: 100%;
+    padding: $spacing-xs $spacing-xl $spacing-xs $spacing-md;
+    border: none;
+    border-radius: $border-radius-md;
+    background-color: $white;
+    font-family: $medium-font;
+    font-size: $normal-font-size;
+    color: $dark;
+    cursor: pointer;
+    transition: $transition-fast;
+    appearance: none;
+    box-shadow: $box-shadow-sm;
+    
+    &:focus {
+        outline: none;
+        box-shadow: $box-shadow-md;
+    }
+}
+
+.selectArrow {
+    position: absolute;
+    top: 50%;
+    right: $spacing-sm;
+    transform: translateY(-50%);
+    pointer-events: none;
+    
+    &:after {
+        content: "";
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid $dark;
+        border-bottom: 2px solid $dark;
+        transform: rotate(45deg);
+    }
+}
+
+.filtersPanel {
+    position: absolute;
+    top: calc(100% + $spacing-sm);
+    left: 0;
+    width: 650px;
+    background-color: $white;
+    border-radius: $border-radius-lg;
+    padding: $spacing-xl;
+    box-shadow: $box-shadow-lg;
+    z-index: 100;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    
+    @include respond-to(laptop) {
+        width: 500px;
+    }
+    
+    @include respond-to(large-tablet) {
+        width: 90vw;
+        max-width: 500px;
+    }
+    
+    @include respond-to(medium-tablet) {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+        clip-path: none;
+        border-radius: $border-radius-sm;
+        
+        &::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+    }
+}
+
+.filterSection {
+    margin-bottom: $spacing-lg;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+    
+    &:not(:last-child) {
+        padding-bottom: $spacing-lg;
+        border-bottom: 1px solid rgba($dark, 0.1);
+    }
+}
+
+.filterTitle {
+    font-family: $title-font;
+    font-size: $body-font-size;
+    font-weight: $semi-bold-font-weight;
+    color: $dark;
+    margin-bottom: $spacing-sm;
+}
+
+.filterTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+}
+
+.filterTag {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    background-color: $gray;
+    border: none;
+    border-radius: $border-radius-lg;
+    color: $dark;
+    font-family: $body-font;
+    font-size: $small-font-size;
+    cursor: pointer;
+    transition: $transition-fast;
+    
+    &:hover {
+        background-color: darken($gray, 5%);
+        transform: translateY(-2px);
+    }
+    
+    &.active {
+        background-color: $dark;
+        color: $white;
+    }
+    
+    svg {
+        transition: $transition-fast;
+    }
+}
+
+.filterActions {
+    display: flex;
+    justify-content: center;
+    padding-top: $spacing-md;
+    margin-top: $spacing-md;
+    border-top: 1px solid rgba($dark, 0.1);
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-xl;
+    
+    @include respond-to(laptop) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to(medium-tablet) {
+        grid-template-columns: 1fr;
+        gap: $spacing-lg;
+    }
+}
+
+.emptyState {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: $spacing-3xl;
+    background-color: $white;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow-sm;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    
+    .emptyIcon {
+        font-size: 3rem;
+        margin-bottom: $spacing-md;
+        opacity: 0.7;
+    }
+    
+    .emptyTitle {
+        font-family: $title-font;
+        font-size: $medium-font-size;
+        font-weight: $bold-font-weight;
+        color: $dark;
+        margin-bottom: $spacing-sm;
+    }
+    
+    .emptyText {
+        font-family: $body-font;
+        font-size: $normal-font-size;
+        color: $text-gray;
+        margin-bottom: $spacing-lg;
+    }
+    
+    .emptyButton {
+        margin-top: $spacing-md;
+    }
+}
+
+// Add additional styles for the ProjectCard component
+.card {
+    background-color: $white;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: $box-shadow-sm;
+    transition: $transition-normal;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    
+    &:hover {
+        box-shadow: $box-shadow-lg;
+        
+        .image {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+.tag {
+    position: absolute;
+    top: $spacing-sm;
+    right: $spacing-sm;
+    padding: $spacing-xxs $spacing-sm;
+    background-color: $dark;
+    color: $white;
+    font-family: $medium-font;
+    font-size: $extra-small-font-size;
+    font-weight: $bold-font-weight;
+    text-transform: uppercase;
+    border-radius: $border-radius-sm;
+    letter-spacing: 1px;
+}
+
+.content {
+    padding: $spacing-lg;
+    flex: 1;
+}
+
+.title {
+    font-family: $title-font;
+    font-size: $big-font-size;
+    font-weight: $bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-sm;
+    line-height: 1.2;
+    transition: $transition-fast;
+    
+    @include respond-to(medium-tablet) {
+        font-size: $medium-font-size;
+    }
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $spacing-xs;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xxs;
+    font-family: $body-font;
+    font-size: $small-font-size;
+    color: $text-gray;
+    
+    svg {
+        color: $text-gray;
+    }
+}
+
+.year {
+    font-family: $medium-font;
+    font-size: $small-font-size;
+    font-weight: $semi-bold-font-weight;
+    color: $dark;
+    padding: $spacing-xxs $spacing-xs;
+    background-color: $gray;
+    border-radius: $border-radius-sm;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-lg;
+    margin-top: auto;
+    background-color: $gray;
+    color: $dark;
+    font-family: $medium-font;
+    font-size: $small-font-size;
+    font-weight: $semi-bold-font-weight;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    svg {
+        transition: $transition-fast;
+    }
+    
+    .card:hover & svg {
+        transform: translateX(5px);
+    }
+}

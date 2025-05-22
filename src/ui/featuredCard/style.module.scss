@@ -1,0 +1,35 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.featureCard {
+    padding: $spacing-md;
+    background-color: $white;
+    border-radius: $border-radius-sm;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: $spacing-sm;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.title {
+    font-family: $title-font;
+    font-size: $font-size-md;
+    font-weight: $semi-bold-font-weight;
+    color: $dark;
+    margin: 0 0 $spacing-xs;
+}
+
+.description {
+    font-family: $body-font;
+    font-size: $font-size-base;
+    color: $text-gray;
+    line-height: 1.5;
+    margin: 0;
+}

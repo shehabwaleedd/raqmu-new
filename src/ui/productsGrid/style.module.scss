@@ -1,0 +1,55 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.grid {
+    display: grid;
+    width: 100%;
+
+    &.columns-2 {
+        grid-template-columns: repeat(2, 1fr);
+
+        @include respond-to(medium-tablet) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.columns-3 {
+        grid-template-columns: repeat(3, 1fr);
+
+        @include respond-to(large-tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond-to(phone) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.columns-4 {
+        grid-template-columns: repeat(4, 1fr);
+
+        @include respond-to(laptop) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include respond-to(large-tablet) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include respond-to(phone) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    &.gap-sm {
+        gap: $spacing-sm;
+    }
+
+    &.gap-md {
+        gap: $spacing-md;
+    }
+
+    &.gap-lg {
+        gap: $spacing-lg;
+    }
+}
