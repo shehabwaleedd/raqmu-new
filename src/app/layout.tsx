@@ -5,7 +5,7 @@ import { ViewTransitions } from "next-view-transitions";
 import SmoothScroller from "@/animation/SmoothScrolling";
 import Navigation from "@/components/navbar";
 import { createClient } from "@/prismicio";
-
+import Footer from "@/components/footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,6 +33,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <Navigation settings={settings} />
           {children}
           <SmoothScroller />
+          <Footer />
         </body>
       </html>
     </ViewTransitions>

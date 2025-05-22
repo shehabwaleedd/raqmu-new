@@ -5,7 +5,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from './style.module.scss';
 
 interface GalleryProps {
     images: Content.ProjectPostDocumentDataGalleryImagesItem[];
@@ -15,12 +14,20 @@ interface ThumbProps {
     selected: boolean;
     image: Content.ProjectPostDocumentDataGalleryImagesItem;
     onClick: () => void;
+    index: number;
 }
 
-const Thumb: React.FC<ThumbProps> = ({ selected, image, onClick }) => (
-    <div className={`${styles.emblaThumb} ${selected ? styles.selected : ''}`}>
-        <button onClick={onClick} className={styles.emblaThumbButton} type="button">
-            <PrismicNextImage field={image.image} className={styles.emblaThumbImg} sizes="(max-width: 768px) 15vw, 10vw" />
+const Thumb: React.FC<ThumbProps> = ({ selected, image, onClick, index }) => (
+    <div className={`border-2px border-black bg-white transition-all duration-200 ${selected ? 'bg-black' : 'hover:bg-gray-50'}`}>
+        <button onClick={onClick} className="w-full h-full p-2" type="button">
+            <div className="aspect-square relative overflow-hidden border-2px border-black">
+                <PrismicNextImage field={image.image} sizes="(max-width: 768px) 15vw, 10vw" fill className="object-cover" />
+            </div>
+            <div className="p-2">
+                <div className={`text-xs font-bold uppercase tracking-wider ${selected ? 'text-white' : 'text-black'}`}>
+                    {String(index + 1).padStart(2, '0')}
+                </div>
+            </div>
         </button>
     </div>
 );
@@ -110,33 +117,62 @@ export default function Gallery({ images }: GalleryProps) {
 
     return (
         <>
-            <div className={styles.gallery}>
-                <h2 className={styles.title}>Gallery</h2>
+            <div className="w-full bg-white border-2px border-black font-helvetica">
+                <div className="border-b-2px border-black bg-gray-50 p-4">
+                    <div className="flex items-center justify-between">
+                        <div className="text-sm font-bold uppercase tracking-wider text-black">PROJECT GALLERY</div>
+                        <div className="border-2px border-black bg-white px-3 py-1">
+                            <div className="text-xs font-bold uppercase tracking-wider text-black">{images.length} IMAGES</div>
+                        </div>
+                    </div>
+                </div>
 
-                <div className={styles.embla}>
-                    <div className={styles.emblaViewport} ref={emblaMainRef}>
-                        <div className={styles.emblaContainer}>
-                            {images.map((item, index) => (
-                                <div className={styles.emblaSlide} key={index}>
-                                    <div className={styles.emblaSlideInner}onClick={() => openModal(index)}role="button"tabIndex={0}onKeyDown={(e) => {if (e.key === 'Enter' || e.key === ' ') {openModal(index);}}}>
-                                        <PrismicNextImage field={item.image}className={styles.emblaSlideImg}sizes="(max-width: 768px) 90vw, 70vw"/>
-                                        <div className={styles.emblaSlideOverlay}>
-                                            <svg width="48"height="48"viewBox="0 0 24 24"fill="none"className={styles.expandIcon}>
-                                                <path d="M15 3H21V9M14 10L21 3M3 9V3H9M3 3L10 10M9 21H3V15M10 14L3 21M21 15V21H15M21 21L14 14"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/>
-                                            </svg>
+                <div className="p-6">
+                    <div className="mb-6">
+                        <div className="border-2px border-black bg-white overflow-hidden" ref={emblaMainRef}>
+                            <div className="flex">
+                                {images.map((item, index) => (
+                                    <div className="flex-none w-full" key={index}>
+                                        <div className="aspect-video relative cursor-pointer group" onClick={() => openModal(index)}>
+                                            <PrismicNextImage field={item.image} sizes="(max-width: 768px) 90vw, 70vw" fill className="object-cover" />
+                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                                <div className="border-2px border-white bg-white text-black p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    <div className="text-xs font-bold uppercase tracking-wider">EXPAND VIEW</div>
+                                                </div>
+                                            </div>
+                                            <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 border-t-2px border-black backdrop-blur-sm p-3">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="text-xs font-bold uppercase tracking-wider text-black">
+                                                        IMAGE {String(index + 1).padStart(2, '0')}
+                                                    </div>
+                                                    <div className="text-xs font-bold uppercase tracking-wider text-gray-600">
+                                                        {index + 1} OF {images.length}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
 
                     {images.length > 1 && (
-                        <div className={styles.emblaThumbs}>
-                            <div className={styles.emblaThumbsViewport} ref={emblaThumbsRef}>
-                                <div className={styles.emblaThumbsContainer}>
+                        <div className="border-2px border-black bg-gray-50 p-4">
+                            <div className="border-b-2px border-black bg-white px-3 py-2 inline-block mb-4">
+                                <div className="text-xs font-bold uppercase tracking-wider text-black">THUMBNAILS</div>
+                            </div>
+                            <div className="overflow-hidden" ref={emblaThumbsRef}>
+                                <div className="flex gap-3">
                                     {images.map((item, index) => (
-                                        <Thumb key={index} onClick={() => onThumbClick(index)} selected={index === selectedIndex} image={item} />
+                                        <div className="flex-none w-24" key={index}>
+                                            <Thumb
+                                                onClick={() => onThumbClick(index)}
+                                                selected={index === selectedIndex}
+                                                image={item}
+                                                index={index}
+                                            />
+                                        </div>
                                     ))}
                                 </div>
                             </div>
@@ -147,35 +183,36 @@ export default function Gallery({ images }: GalleryProps) {
 
             <AnimatePresence>
                 {modalOpen && (
-                    <motion.div className={styles.modal} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} onClick={closeModal}>
-                        <motion.div className={styles.modalContent} initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.8, 0.25, 1] }} onClick={(e) => e.stopPropagation()}>
-                            <button className={styles.modalClose} onClick={closeModal} aria-label="Close modal">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </button>
-
-                            <div className={styles.modalImageWrapper}>
-                                <PrismicNextImage field={images[modalImageIndex].image}className={styles.modalImage}sizes="100vw"priority/>
+                    <motion.div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} onClick={closeModal}>
+                        <motion.div className="border-2px border-white bg-white max-w-6xl max-h-full relative" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ duration: 0.3 }} onClick={(e) => e.stopPropagation()}>
+                            <div className="border-b-2px border-black bg-white p-4">
+                                <div className="flex items-center justify-between">
+                                    <div className="text-sm font-bold uppercase tracking-wider text-black">
+                                        IMAGE {String(modalImageIndex + 1).padStart(2, '0')} OF {String(images.length).padStart(2, '0')}
+                                    </div>
+                                    <button className="border-2px border-black bg-black text-white hover:bg-white hover:text-black transition-all duration-200 px-3 py-1 text-xs font-bold uppercase tracking-wider" onClick={closeModal}>
+                                        CLOSE
+                                    </button>
+                                </div>
                             </div>
 
-                            {images.length > 1 && (
-                                <>
-                                    <button className={`${styles.modalNav} ${styles.modalNavPrev}`}onClick={goToPrev}disabled={modalImageIndex === 0}aria-label="Previous image">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M15 18L9 12L15 6"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/>
-                                        </svg> 
-                                    </button>
-                                    <button className={`${styles.modalNav} ${styles.modalNavNext}`}onClick={goToNext}disabled={modalImageIndex === images.length - 1}aria-label="Next image">
-                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M9 18L15 12L9 6"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/>
-                                        </svg>
-                                    </button>
-                                </>
-                            )}
+                            <div className="relative">
+                                <PrismicNextImage field={images[modalImageIndex].image} sizes="90vw" className="max-h-[70vh] w-auto" />
 
-                            <div className={styles.modalCounter}>
-                                {modalImageIndex + 1} / {images.length}
+                                {images.length > 1 && (
+                                    <>
+                                        <button className={`absolute left-4 top-1/2 -translate-y-1/2 border-2px border-white bg-white text-black hover:bg-black hover:text-white transition-all duration-200 p-3 ${modalImageIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={goToPrev} disabled={modalImageIndex === 0}>
+                                            <div className="w-4 h-4 flex items-center justify-center">
+                                                <span className="text-sm font-bold">←</span>
+                                            </div>
+                                        </button>
+                                        <button className={`absolute right-4 top-1/2 -translate-y-1/2 border-2px border-white bg-white text-black hover:bg-black hover:text-white transition-all duration-200 p-3 ${modalImageIndex === images.length - 1 ? 'opacity-50 cursor-not-allowed' : ''}`} onClick={goToNext} disabled={modalImageIndex === images.length - 1}>
+                                            <div className="w-4 h-4 flex items-center justify-center">
+                                                <span className="text-sm font-bold">→</span>
+                                            </div>
+                                        </button>
+                                    </>
+                                )}
                             </div>
                         </motion.div>
                     </motion.div>

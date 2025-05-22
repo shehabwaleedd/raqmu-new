@@ -2,36 +2,48 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import styles from './style.module.scss';
 
 interface SectionHeaderProps {
     eyebrow?: string;
     title: string;
-    subtitle?: string | React.ReactNode;
-    align?: 'left' | 'center' | 'right';
-    size?: 'sm' | 'md' | 'lg' | 'xl';
+    subtitle?: string;
+    alignment?: 'left' | 'center' | 'right';
     className?: string;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ eyebrow, title, subtitle, align = 'left', size = 'md', className = '', }) => {
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+    eyebrow,
+    title,
+    subtitle,
+    alignment = 'left',
+    className = '',
+}) => {
+    const alignmentClasses = {
+        left: 'text-left',
+        center: 'text-center',
+        right: 'text-right'
+    };
+
     return (
-        <motion.header className={`${styles.header} ${styles[align]} ${styles[size]} ${className}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <motion.div className={`font-helvetica ${alignmentClasses[alignment]} ${className}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             {eyebrow && (
-                <motion.div className={styles.eyebrow} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.1 }}>
-                    {eyebrow}
-                </motion.div>
+                <div className="border-2px border-black bg-white px-4 py-2 inline-block mb-6">
+                    <div className="text-xs font-bold uppercase tracking-wider text-black">{eyebrow}</div>
+                </div>
             )}
-
-            <motion.h2 className={styles.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.2 }}>
+            
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black uppercase tracking-wider text-black leading-none mb-6">
                 {title}
-            </motion.h2>
-
+            </h1>
+            
             {subtitle && (
-                <motion.div className={styles.subtitle} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.3 }}>
-                    {typeof subtitle === 'string' ? <p>{subtitle}</p> : subtitle}
-                </motion.div>
+                <div className="border-l-4 border-black pl-6 max-w-3xl">
+                    <p className="text-lg font-medium text-gray-800 leading-relaxed">
+                        {subtitle}
+                    </p>
+                </div>
             )}
-        </motion.header>
+        </motion.div>
     );
 };
 
